@@ -1,6 +1,6 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+body {
+  font-family: "Segoe UI", Nunito, Tahoma, Geneva, Verdana, sans-serif;
+  background: #0984e3;
+  color: #81ecec;
+  font-size: 24px;
 }
