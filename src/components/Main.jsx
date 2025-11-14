@@ -19,9 +19,9 @@ const Main = () => {
           </button>
         </div>
       </div>
-      <div className="flex flex-col w-full flex-grow relative">
+      <div className="flex flex-col w-full grow relative">
         <div className="absolute mb-1 pb-2 left-0 right-0 top-0 bottom-0 p-3 flex overflow-x-scroll overflow-y-hidden">
-          <div className="mr-3 w-60 h-fit rounded-md bg-black flex-shrink-0">
+          <div className="mr-3 w-60 h-fit rounded-md bg-black shrink-0">
             <div className="list-body">
               <div className="flex justify-between items-center px-3 py-1">
                 <span>To Do</span>

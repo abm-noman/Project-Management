@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Plus } from "react-feather";
+import { ChevronLeft, ChevronRight, Plus, X } from "react-feather";
+import { Popover } from "react-tiny-popover";
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [showPop, setShowPop] = useState(false);
 
   return (
     <div
-      className={`bg-[#130e33] h-[calc(100vh-3rem)] border-r border-r-[#1a193d] transition-all duration-500 ${
+      className={`relative bg-[#130e33] h-[calc(100vh-3rem)] border-r border-r-[#1a193d] transition-all duration-500 overflow-visible ${
         collapsed ? "w-[50px]" : "w-[250px]"
       }`}
     >
@@ -34,19 +36,50 @@ const Sidebar = () => {
           </div>
 
           <div className="board-list">
-            <div className="flex justify-between px-3 py-2">
-                <h6>Your Boards</h6>
-                <button className="hover:bg-slate-400 p-1 rounded-sm">
-                    <Plus size={18}> </Plus>
+            <div className="flex justify-between px-3 py-2 items-center">
+              <h6>Your Boards</h6>
+
+              {/* POPUP BUTTON */}
+              <Popover
+                isOpen={showPop}
+                onClickOutside={() => setShowPop(false)}
+                position="right"
+                align="start"
+                content={
+                  <div className="ml-2  w-60 flex flex-col justify-center items-center bg-slate-600 text-white rounded">
+                    <button onClick={() => setShowPop(!showPop)} className="absolute right-2 top-2 bg-gray-800 hover:bg-gray-700 p-1 rounded"><X size={16} />
+                    <h4 className="py-3">Create New Board</h4>
+                    <img src="http://placehold.co/200x120/png" alt="" />
+
+                    <div className="mt-3 flex flex-col items-start w-full">
+                        <label className="px-3 pt-3" htmlFor="title">Board Title <span>*</span> </label>
+                        <input className=" h-8 px-2 w-full rounded border-2 border-gray-500" type="text" id="board-name" placeholder="Enter board name..." />
+                        <label className="px-3 pt-3" htmlFor="Color">Board Color </label>
+                        <input className=" h-8 px-2 w-full rounded border-2 border-gray-500" type="Color" id="board-color" />
+                        <button className="w-full rounded h-8 bg-slate-700 mt-2 hover:bg-green-600"> Create Board </button>
+                    </div>
+
+                      
+                    </button>
+                  </div>
+                }
+              >
+                <button
+                  onClick={() => setShowPop(!showPop)}
+                  className="hover:bg-slate-400 p-1 rounded-sm"
+                >
+                  <Plus size={16} />
                 </button>
+              </Popover>
             </div>
           </div>
+
           <ul>
             <li>
-                <button className="px-3 py-2 w-full text-sm flex justify-start align-baseline items-center hover:bg-slate-400">
-                    <span className="w-6 h-max rounded-sm mr-2 bg-green-600">&nbsp;</span>
-                    <span>Personal Board</span>
-                </button>
+              <button className="px-3 py-2 w-full text-sm flex items-center hover:bg-slate-400">
+                <span className="w-6 h-4 rounded-sm mr-2 bg-green-600"></span>
+                <span>Personal Board</span>
+              </button>
             </li>
           </ul>
         </div>

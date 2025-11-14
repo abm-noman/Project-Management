@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Plus, X } from "react-feather";
 const CardAdd = () => {
-  const [card, setCard] = useState("");
+//   const [card, setCard] = useState("");
   const [show, setShow] = useState(false);
 
   return (
