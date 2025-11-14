@@ -6,7 +6,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`bg-[#4834d4] h-[calc(100vh-3rem)] border-r border-r-[#64bd95] transition-all duration-500 ${
+      className={`bg-[#130e33] h-[calc(100vh-3rem)] border-r border-r-[#1a193d] transition-all duration-500 ${
         collapsed ? "w-[50px]" : "w-[200px]"
       }`}
     >
@@ -23,7 +23,7 @@ const Sidebar = () => {
 
       {!collapsed && (
         <div>
-          <div className="workspace p-3 flex justify-between items-center border-b border-b-[#64bd95]">
+          <div className="workspace p-3 flex justify-between items-center border-b border-b-[#1a193d]">
             <h4>ABM Noman's Workspace</h4>
             <button
               onClick={() => setCollapsed(!collapsed)}
@@ -44,7 +44,7 @@ const Sidebar = () => {
           <ul>
             <li>
                 <button className="px-3 py-2 w-full text-sm flex justify-start align-baseline items-center hover:bg-slate-400">
-                    <span className="w-6 h-max rounded-sm mr-2 bg-red-600">&nbsp;</span>
+                    <span className="w-6 h-max rounded-sm mr-2 bg-green-600">&nbsp;</span>
                     <span>Personal Board</span>
                 </button>
             </li>
