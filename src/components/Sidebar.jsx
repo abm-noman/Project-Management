@@ -7,7 +7,7 @@ const Sidebar = () => {
   return (
     <div
       className={`bg-[#130e33] h-[calc(100vh-3rem)] border-r border-r-[#1a193d] transition-all duration-500 ${
-        collapsed ? "w-[50px]" : "w-[200px]"
+        collapsed ? "w-[50px]" : "w-[250px]"
       }`}
     >
       {collapsed && (

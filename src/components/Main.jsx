@@ -1,4 +1,5 @@
 import { Edit2, MoreHorizontal, UserPlus } from "react-feather";
+import CardAdd from "./CardAdd.jsx";
 
 const Main = () => {
   return (
@@ -36,7 +37,7 @@ const Main = () => {
                   </button>
                 </span>
               </div>
-            
+            <CardAdd> </CardAdd>
 
 
 
