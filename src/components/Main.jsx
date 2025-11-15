@@ -1,12 +1,16 @@
+import { useContext } from "react";
 import { Edit2, MoreHorizontal, UserPlus } from "react-feather";
+import { BoardContext } from "../../context/BoardContext.jsx";
 import CardAdd from "./CardAdd.jsx";
 
 const Main = () => {
+    const { allBoard, setAllBoard } = useContext(BoardContext);
+    const bData = allBoard.boards[allBoard.active];
   return (
     <div className="flex flex-col bg-[#1e272e] w-full">
       <div className="p-3 bg-black bg-opacity-50 flex justify-between items-center w-full">
         <h2 className="text-lg text-white font-bold">
-          Welcome to the Project Management App
+          {bData.name}
         </h2>
 
         <div className="flex items-center justify-center">
@@ -37,11 +41,7 @@ const Main = () => {
                   </button>
                 </span>
               </div>
-            <CardAdd> </CardAdd>
-
-
-
-
+              <CardAdd> </CardAdd>
             </div>
           </div>
         </div>

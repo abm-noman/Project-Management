@@ -13,9 +13,9 @@ function App() {
         name: "Development Tasks",
         bgcolor: "#0fbcf9",
         list: [
-          { id: 1, title: "To Do", items:[{id:"crdFt", title:"Project Description 1"}] },
-          { id: 2, title: "In Progress", items:[{id:"crdSc", title:"Project Description 2"}] },
-          { id: 3, title: "Completed", items:[{id:"crdtd", title:"Project Description 3"}] },
+          { id: 1, title: "To Do", items:[{id:"card1", title:"Project Description 1"}] },
+          { id: 2, title: "In Progress", items:[{id:"card2", title:"Project Description 2"}] },
+          { id: 3, title: "Completed", items:[{id:"card3", title:"Project Description 3"}] },
         ]
       }
      ]
