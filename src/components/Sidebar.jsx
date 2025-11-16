@@ -124,7 +124,7 @@ const Sidebar = () => {
             {allboard &&
               allboard.boards.map((x, i) => {
                 return (
-                  <li>
+                  <li key={i}>
                     <button
                       onClick={() => setActiveBoard(i)}
                       className="px-3 py-2 w-full text-sm flex items-center hover:bg-slate-400"
