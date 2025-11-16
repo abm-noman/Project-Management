@@ -2,20 +2,53 @@ import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { useContext } from "react";
 import { Edit2, MoreHorizontal, UserPlus } from "react-feather";
 import { BoardContext } from "../../context/BoardContext.jsx";
+import Utilities from "../utilities/Utilities.js";
+import AddList from "./AddList.jsx";
 import CardAdd from "./CardAdd.jsx";
 
 const Main = () => {
   const { allBoard, setAllBoard } = useContext(BoardContext);
   const bData = allBoard.boards[allBoard.active];
 
-  function onDragEnd(result) {}
+  function onDragEnd(res) {
+    if(!res.destination){
+        console.log("No destination");
+        return;
+    }
+    const newList = [...bData.list];
+    const s_id = parseInt(res.source.droppableId);
+    const d_id = parseInt(res.destination.droppableId);
+    const [removed] = newList[s_id - 1].items.splice(res.source.index,1);
+    newList[d_id - 1].items.splice(res.destination.index,0,removed);
 
-  const cardData = (e) => {
+    let board = {...allBoard};
+    board_.boards[board_.active].list = newList;
+    setAllBoard(board_);
+
+  }
+
+  const cardData = (e,ind) => {
     let newList = { ...bData.list };
+    newList[ind].items.push({id:Utilities.makeid(5), title:e});
+
+    let board = {...allBoard};
+    board_.boards[board_.active].list = newList;
+    setAllBoard(board_);
+  };
+
+    const listData = (e) => {
+    let newList = { ...bData.list };
+    newList.push(
+        {id:newList.length + 1 + '', title:e, item:[]}
+    );
+
+    let board = {...allBoard};
+    board_.boards[board_.active].list = newList;
+    setAllBoard(board_);
   };
 
   return (
-    <div className="flex flex-col bg-[#1e272e] w-full">
+    <div className="flex flex-col w-full" style={{backgroundColor:`${bData.bgcolor}`}}>
       <div className="p-3 bg-black bg-opacity-50 flex justify-between items-center w-full">
         <h2 className="text-lg text-white font-bold">{bData.name}</h2>
 
@@ -43,15 +76,16 @@ const Main = () => {
                           <MoreHorizontal size={16} />
                         </button>
                       </div>
-                      <Droppable droppableId={x.id}>
+                      <Droppable droppableId={String(x.id)}>
                         {(provided, snapshot) => (
                           <div
                             className="py-1"
                             ref={provided.innerRef}
                             style={{
+
                               backgroundColor: snapshot.isDraggingOver
-                                ? "blue"
-                                : "grey",
+                                ? "#123"
+                                : "transparent",
                             }}
                             {...provided.droppableProps}
                           >
@@ -86,12 +120,16 @@ const Main = () => {
                           </div>
                         )}
                       </Droppable>
-                      <CardAdd getCards={(e) => cardData(e)}></CardAdd>
+                      <CardAdd getCards={(e) => cardData(e,ind)}></CardAdd>
                     </div>
                   </div>
                 );
               })}
           </DragDropContext>
+
+          <AddList getList={(e)=> listData(e)}>
+
+          </AddList>
         </div>
       </div>
     </div>
