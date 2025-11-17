@@ -10,33 +10,44 @@ const Sidebar = () => {
     list: [],
   };
 
-
   const [boardData, setBoardData] = useState(blankBoard);
   const [collapsed, setCollapsed] = useState(false);
   const [showPop, setShowPop] = useState(false);
-  const { allboard, setAllboard } = useContext(BoardContext);
+   const { allBoard, setAllBoard } = useContext(BoardContext);
+
 
   const setActiveBoard = (i) => {
-    let newBoard = { ...allboard }
-    newBoard.active = i;
-    setAllboard(newBoard);
+    setAllBoard((prev) => ({ ...prev, active: i }));
   };
 
-    const addBoard = () => {
-  let newBoard = {
-    ...allboard,
-    boards: [...allboard.boards, boardData], // create NEW array
+  // const setActiveBoard = (i) => {
+  //   let newBoard = { ...allboard };
+  //   newBoard.active = i;
+  //   setAllboard(newBoard);
+  // };
+
+  const addBoard = () => {
+    setAllBoard((prev) => ({
+      ...prev,
+      boards: [...prev.boards, boardData],
+    }));
+
+    setBoardData(blankBoard);
+    setShowPop(!showPop);
   };
 
-  setAllboard(newBoard);
-  setBoardData(blankBoard);
-  setShowPop(!showPop);
-};
+  // const addBoard = () => {
+  //   let newBoard = { ...allboard };
+  //   newBoard.boards.push(boardData);
+  //   setAllboard(newBoard);
+  //   setBoardData(blankBoard);
+  //   setShowPop(!showPop);
+  // };
 
   return (
     <div
-      className={`relative bg-[#130e33] h-[calc(100vh-3rem)] border-r border-r-[#1a193d] transition-all duration-500 overflow-visible ${
-        collapsed ? "w-[50px]" : "w-[250px]"
+      className={`bg-[#130e33] h-[calc(100vh-3rem)] border-r border-r-[#1a193d] transition-all duration-500 shrink-0 linear  ${
+        collapsed ? "w-[42px]" : "w-[280px]"
       }`}
     >
       {collapsed && (
@@ -52,8 +63,8 @@ const Sidebar = () => {
 
       {!collapsed && (
         <div>
-          <p>{JSON.stringify(allboard)}</p>
-          <div className="workspace p-3 flex justify-between items-center border-b border-b-[#1a193d]">
+          {/* <p>{JSON.stringify(allBoard)}</p> */}
+          <div className="workspace p-3 flex justify-between border-b border-b-[#1a193d]">
             <h4>ABM Noman's Workspace</h4>
             <button
               onClick={() => setCollapsed(!collapsed)}
@@ -63,7 +74,7 @@ const Sidebar = () => {
             </button>
           </div>
 
-          <div className="board-list">
+          <div className="boardlist">
             <div className="flex justify-between px-3 py-2 items-center">
               <h6>Your Boards</h6>
 
@@ -74,7 +85,7 @@ const Sidebar = () => {
                 position="right"
                 align="start"
                 content={
-                  <div className="ml-2  w-60 flex flex-col justify-center items-center bg-slate-600 text-white rounded">
+                  <div className="ml-2 p-2 w-60 flex flex-col justify-center items-center bg-slate-600 text-white rounded">
                     <button
                       onClick={() => setShowPop(!showPop)}
                       className="absolute right-2 top-2 bg-gray-800 hover:bg-gray-700 p-1 rounded"
@@ -135,18 +146,20 @@ const Sidebar = () => {
           </div>
 
           <ul>
-            {allboard &&
-              allboard.boards.map((x, i) => {
+            {allBoard.boards &&
+              allBoard.boards.map((x, i) => {
                 return (
                   <li key={i}>
                     <button
                       onClick={() => setActiveBoard(i)}
-                      className="px-3 py-2 w-full text-sm flex items-center hover:bg-slate-400"
+                      className="px-3 py-2 w-full text-sm flex justify-start align-baseline  hover:bg-slate-400"
                     >
                       <span
-                        className="w-6 h-4 rounded-sm mr-2"
+                        className="w-6 h-max rounded-sm mr-2"
                         style={{ backgroundColor: `${x.bgcolor}` }}
-                      ></span>
+                      >
+                        &nbsp;
+                      </span>
                       <span>{x.name}</span>
                     </button>
                   </li>
