@@ -1,7 +1,7 @@
 import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import { useContext } from "react";
 import { Edit2, MoreHorizontal, UserPlus } from "react-feather";
-import { BoardContext } from "../../context/BoardContext.jsx";
+import { BoardContext } from "../context/BoardContext.jsx";
 import Utilities from "../utilities/Utilities.js";
 import AddList from "./AddList.jsx";
 import CardAdd from "./CardAdd.jsx";
